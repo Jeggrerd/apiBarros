@@ -1,0 +1,30 @@
+services:
+  barros-db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=usuario
+      - POSTGRES_DB=barros
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - barros-volume:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=email@email.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    ports:
+      - '5000:80'
+    volumes:
+      - pgadmin-volume:/var/lib/pgadmin
+
+
+volumes:
+  barros-volume:
+  pgadmin-volume:
